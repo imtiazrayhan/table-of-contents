@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Table of Contents</title>
+		<script src="https://unpkg.com/react@15.6.1/dist/react.js"></script>
+		<script src="https://unpkg.com/react-dom@15.6.1/dist/react-dom.js"></script>
+		<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+		<script src="https://unpkg.com/redux@3.7.2/dist/redux.js"></script>
+		<script src="https://unpkg.com/react-redux@5.0.5/dist/react-redux.js"></script>
+		<script src="TableOfContents.js"></script>
+		<script src="TableOfContentsRedux.js"></script>
+		<link rel="stylesheet" href="themes/theme-1.css"/>
+	</head>
+	<body>
+		<div id="table-of-contents"></div>
+		<script type="text/babel">
+
+			// adapters
+			const combineReducers = Redux.combineReducers;
+			const createStore = Redux.createStore;
+			const Provider = ReactRedux.Provider;
+
+			// sample table of contents items
+			const sampleItems = [
+				{
+					groupLabel:'Website Management' ,
+					items     :[
+						{
+							key  :'dashboard' ,
+							label:'Dashboard'
+						} ,
+						{
+							key  :'comments' ,
+							label:'Comments'
+						} ,
+						{
+							key  :'users' ,
+							label:'Users' ,
+							items:[
+								{
+									key  :'edit-users' ,
+									label:'Edit'
+								}
+								,
+								{
+									key  :'user-permissions' ,
+									label:'Permissions' ,
+									items:[
+										{
+											key  :'create-user-permissions' ,
+											label:'Create'
+										}
+										,
+										{
+											key  :'delete-user-permissions' ,
+											label:'Delete'
+										}
+									]
+								}
+							]
+						} ,
+						{
+							key  :'news' ,
+							label:'News'
+						} ,
+					]
+				} ,
+				{
+					groupLabel:'Account Settings' ,
+					items     :[
+						{
+							key  :'profile-settings' ,
+							label:'Profile'
+						} ,
+						{
+							key  :'delete-account' ,
+							label:'Delete Account'
+						}
+					]
+				}
+			];
+
+			// redux init
+			const reducers = combineReducers({
+				tableOfContents:TableOfContentsRedux.createReducer('dashboard')
+			});
+			const store = createStore(
+				reducers
+			);
+
+			// react-redux connection
+			const mapStateToProps = (state , ownProps) => ({
+				currentPage:state.tableOfContents.currentPage
+			});
+			const mapDispatchToProps = dispatch => ({
+				onItemClick:itemKey => {
+					dispatch(TableOfContentsRedux.itemClick(itemKey));
+				}
+			});
+			const TableOfContentsContainer = ReactRedux.connect(
+				mapStateToProps ,
+				mapDispatchToProps
+			)(TableOfContents);
+
+			// render react component
+			var component = ReactDOM.render(
+					<Provider store={store}>
+						<TableOfContentsContainer items={sampleItems}/>
+					</Provider>
+				,
+				document.getElementById('table-of-contents')
+			);
+		</script>
+	</body>
+</html>
