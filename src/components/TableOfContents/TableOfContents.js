@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 
 export default class TableOfContents extends React.Component {
 	constructor(props) {
@@ -58,3 +59,9 @@ export default class TableOfContents extends React.Component {
 		);
 	}
 }
+
+TableOfContents.propTypes = {
+	currentPage:PropTypes.string.isRequired ,
+	onItemClick:PropTypes.func.isRequired ,
+	items:PropTypes.array.isRequired
+};
