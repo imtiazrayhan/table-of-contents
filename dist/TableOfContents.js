@@ -149,6 +149,7 @@ var TableOfContents = function (_React$Component) {
 					className: (isActive ? 'active ' : '') + key,
 					onClick: function onClick(e) {
 						e.stopPropagation();
+						e.preventDefault();
 						_this2.props.onItemClick(key);
 					}
 
