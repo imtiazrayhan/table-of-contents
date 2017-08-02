@@ -4,8 +4,6 @@ export default class TableOfContents extends React.Component {
 	constructor(props) {
 		super(props);
 
-		console.log(props);
-
 		this.generateItemHTML = this.generateItemHTML.bind(this);
 	}
 
