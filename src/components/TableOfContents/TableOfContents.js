@@ -16,7 +16,7 @@ export default class TableOfContents extends React.Component {
 			<li
 				key={key}
 				label={label}
-				className={(isActive ? 'active' : '') + ' ' + key}
+				className={(isActive ? 'active ' : '') + key}
 				onClick={(e) => {
 					e.stopPropagation();
 					this.props.onItemClick(key)

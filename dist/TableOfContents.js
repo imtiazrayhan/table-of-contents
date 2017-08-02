@@ -126,8 +126,6 @@ var TableOfContents = function (_React$Component) {
 
 		var _this = _possibleConstructorReturn(this, (TableOfContents.__proto__ || Object.getPrototypeOf(TableOfContents)).call(this, props));
 
-		console.log(props);
-
 		_this.generateItemHTML = _this.generateItemHTML.bind(_this);
 		return _this;
 	}
@@ -148,7 +146,7 @@ var TableOfContents = function (_React$Component) {
 				{
 					key: key,
 					label: label,
-					className: (isActive ? 'active' : '') + ' ' + key,
+					className: (isActive ? 'active ' : '') + key,
 					onClick: function onClick(e) {
 						e.stopPropagation();
 						_this2.props.onItemClick(key);
