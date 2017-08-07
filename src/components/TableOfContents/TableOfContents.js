@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 export default class TableOfContents extends React.Component {
 	constructor(props) {
@@ -18,15 +18,15 @@ export default class TableOfContents extends React.Component {
 				key={key}
 				label={label}
 				className={(isActive ? 'active ' : '') + key}
-				onClick={(e) => {
-					e.stopPropagation();
-					e.preventDefault();
+				onClick={event => {
+					event.stopPropagation();
+					event.preventDefault();
 					this.props.onItemClick(key)
 				}}
 
 			>
 				<a href="#">{label}</a>
-				{items ? <ul>{items.map(item => this.generateItemHTML(item))}</ul> : null}
+				{items ? <ul>{items.map(_item => this.generateItemHTML(_item))}</ul> : null}
 			</li>
 		);
 	}
@@ -37,7 +37,7 @@ export default class TableOfContents extends React.Component {
 				{
 					this.props.items.map(item => {
 
-						const {groupLabel , key , label , items} = item;
+						const {groupLabel , items} = item;
 
 						return groupLabel ?
 
@@ -46,7 +46,7 @@ export default class TableOfContents extends React.Component {
 									{groupLabel}
 								</p>
 								<ul>
-									{items ? items.map(item => this.generateItemHTML(item)) : null}
+									{items ? items.map(_item => this.generateItemHTML(_item)) : null}
 								</ul>
 							</div>
 
@@ -63,5 +63,5 @@ export default class TableOfContents extends React.Component {
 TableOfContents.propTypes = {
 	currentPage:PropTypes.string.isRequired ,
 	onItemClick:PropTypes.func.isRequired ,
-	items:PropTypes.array.isRequired
+	items      :PropTypes.array.isRequired
 };
