@@ -23,22 +23,9 @@ if ( isProduction ) {
 }
 const outputFilename = !isProduction ? '[name].js' : '[name].min.js';
 
-module.exports = {
-	entry    :{
-		'TableOfContents':[
-			...(themes.map(themeName => './src/themes/' + themeName + '.scss')),
-			'./index.js'
-		] ,
-		'TableOfContentsRedux':['./src/redux/redux.js']
-	} ,
-	output   :{
-		path         :path.resolve('./dist') ,
-		filename     :outputFilename ,
-		libraryTarget:'var' ,
-		library      :'[name]'
-	} ,
+const baseConfig = {
 	externals:{
-		'react':'React' ,
+		'react'     :'React' ,
 		'prop-types':'PropTypes'
 	} ,
 	module   :{
@@ -48,4 +35,36 @@ module.exports = {
 		]
 	} ,
 	plugins  :plugins
-};
+}
+
+const generateOutputConfig = libraryName => ({
+	path         :path.resolve('./dist') ,
+	filename     :outputFilename ,
+	libraryTarget:'var' ,
+	library      :libraryName
+});
+
+const TableOfContentsConfig = Object.assign({} ,
+	baseConfig ,
+	{
+		entry :{
+			'table-of-contents':[
+				...(themes.map(themeName => './src/themes/' + themeName + '.scss')) ,
+				'./index.js'
+			]
+		} ,
+		output:generateOutputConfig('TableOfContents')
+	}
+);
+
+const ReduxConfig = Object.assign({} ,
+	baseConfig ,
+	{
+		entry :{
+			'table-of-contents-redux':['./src/redux/redux.js']
+		} ,
+		output:generateOutputConfig('TableOfContentsRedux')
+	}
+)
+
+module.exports = [TableOfContentsConfig , ReduxConfig];
