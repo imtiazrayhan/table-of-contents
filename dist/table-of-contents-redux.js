@@ -84,10 +84,10 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-// Actions
+// actions
 var CHANGE_PAGE_TO = 'table-of-contents/item-click';
 
-// Reducer
+// reducer
 var createReducer = exports.createReducer = function createReducer(defaultPage) {
 	return function () {
 		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { currentPage: defaultPage };
@@ -105,9 +105,12 @@ var createReducer = exports.createReducer = function createReducer(defaultPage) 
 	};
 };
 
-// Action Creators
+// action Creators
 var itemClick = exports.itemClick = function itemClick(newPage) {
-	return { type: CHANGE_PAGE_TO, newPage: newPage };
+	return {
+		type: CHANGE_PAGE_TO,
+		newPage: newPage
+	};
 };
 
 /***/ })

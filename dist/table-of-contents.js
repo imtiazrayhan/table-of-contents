@@ -151,9 +151,9 @@ var TableOfContents = function (_React$Component) {
 					key: key,
 					label: label,
 					className: (isActive ? 'active ' : '') + key,
-					onClick: function onClick(e) {
-						e.stopPropagation();
-						e.preventDefault();
+					onClick: function onClick(event) {
+						event.stopPropagation();
+						event.preventDefault();
 						_this2.props.onItemClick(key);
 					}
 
@@ -166,8 +166,8 @@ var TableOfContents = function (_React$Component) {
 				items ? _react2.default.createElement(
 					'ul',
 					null,
-					items.map(function (item) {
-						return _this2.generateItemHTML(item);
+					items.map(function (_item) {
+						return _this2.generateItemHTML(_item);
 					})
 				) : null
 			);
@@ -182,8 +182,6 @@ var TableOfContents = function (_React$Component) {
 				{ className: 'table-of-contents-root' },
 				this.props.items.map(function (item) {
 					var groupLabel = item.groupLabel,
-					    key = item.key,
-					    label = item.label,
 					    items = item.items;
 
 
@@ -198,8 +196,8 @@ var TableOfContents = function (_React$Component) {
 						_react2.default.createElement(
 							'ul',
 							null,
-							items ? items.map(function (item) {
-								return _this3.generateItemHTML(item);
+							items ? items.map(function (_item) {
+								return _this3.generateItemHTML(_item);
 							}) : null
 						)
 					) : _this3.generateItemHTML(item);
